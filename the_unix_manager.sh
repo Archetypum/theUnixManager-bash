@@ -11,7 +11,7 @@
 # TODO:
 #    * add logging functionality arguments.
 #    * test this on more systems.
-#    * improve bash version.
+#    * add more methods to the package managers.
 #    * many more?
 # 
 # theUnixManager is licensed by GNU Lesser General Public License V3.
@@ -24,6 +24,7 @@ declare WHITE="\033[97m"
 declare YELLOW="\033[93m"
 declare ORANGE="\033[38;5;214m"
 declare BLUE="\033[94m"
+declare CYAN="\e[0;36m"
 declare PURPLE="\033[95m"
 declare GREEN="\033[92m"
 declare RED="\033[91m"
@@ -114,139 +115,156 @@ function the_unix_manager_tester() {
 	#
 	# Returns:
 	# 	Nothing.
-	
+
 	echo -e "theUnixManager version: $(the_unix_manager_version)\n"
 	
+	declare -A TEST_RESULTS
 	local INIT_SYSTEM
 	local DISTRO
-	declare -a SUCCESSFULLY_TESTED
 	
 	INIT_SYSTEM=$(get_init_system)
 	DISTRO=$(get_user_distro)
 
 	echo "user distro: $DISTRO"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["get_user_distro"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["get_user_distro"]=false
 	fi
 	
 	echo "user init system: $INIT_SYSTEM"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["get_init_system"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["get_init_system"]=false
 	fi
 	
 	echo -e "${BLACK}black text${RESET}"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["black_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["black_text"]=false
 	fi
 	
 	echo -e "${WHITE}white text${RESET}"	
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["white_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["white_text"]=false
 	fi
-
+	
 	echo -e "${YELLOW}yellow text${RESET}"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["yellow_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["yellow_text"]=false
 	fi
 	
 	echo -e "${ORANGE}orange text${RESET}"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["orange_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["orange_text"]=false
 	fi
 
 	echo -e "${BLUE}blue text${RESET}"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["blue_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["blue_text"]=false
 	fi
 	
+	echo -e "${CYAN}cyan text${RESET}"
+	if prompt_user "[?] is that true"; then
+		TEST_RESULTS["cyan_text"]=true
+	else
+		TEST_RESULTS["cyan_text"]=false
+	fi
+
 	echo -e "${PURPLE}purple text${RESET}"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["purple_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["purple_text"]=false
 	fi
 	
 	echo -e "${GREEN}green text${RESET}"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["green_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["green_text"]=false
 	fi
 	
 	echo -e "${RED}red text${RESET}"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["red_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["red_text"]=false
 	fi
 	
 	echo -e "${BOLD}bold text${RESET}"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["bold_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["bold_text"]=false
 	fi
 	
 	echo -e "${UNDERLINE}underlined text${RESET}"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["underlined_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["underlined_text"]=false
 	fi
 
 	echo -e "${REVERSED}reversed text${RESET}"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["reversed_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["reversed_text"]=false
 	fi
 	
 	echo -e "${ITALIC}italic text${RESET}"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["italic_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["italic_text"]=false
 	fi
 	
 	echo -e "${CROSSED_OUT}crossed out text${RESET}"
 	if prompt_user "[?] is that true?"; then
-		SUCCESSFULLY_TESTED+=("true")
+		TEST_RESULTS["crossed_out_text"]=true
 	else
-		SUCCESSFULLY_TESTED+=("false")
+		TEST_RESULTS["crossed_out_text"]=false
 	fi
 	
 	local ALL_TESTS_PASSED="true"
-	for RESULT in "${SUCCESSFULLY_TESTED[@]}"; do
+	for RESULT in "${TEST_RESULTS[@]}"; do
 		if [[ "$RESULT" == "false" ]]; then
-			local ALL_TESTS_PASSED="false"
+			ALL_TESTS_PASSED="false"
 			break
 		fi
 	done
 	
-	init_system_handling "$INIT_SYSTEM" "ssh" "start" && SUCCESSFULLY_TESTED+=("true") || SUCCESSFULLY_TESTED+=("false")
-	package_handling "$DISTRO" "install" "vim" "apt" && SUCCESSFULLY_TESTED+=("false") || SUCCESSFULLY_TESTED+=("true")
+	init_system_handling "$INIT_SYSTEM" "ssh" "start" && TEST_RESULTS["init_system_handling"]=true || TEST_RESULTS["init_system_handling"]=false
+	package_handling "$DISTRO" "install" "vim" "apt" && TEST_RESULTS["package_handling"]=false || TEST_RESULTS["package_handling"]=true
 	
-	if [[ "$ALL_TESTS_PASSED" == "false" ]]; then
-		echo -e "\n${ORANGE}[!] Some tests are not passed:${RESET}"
+	local ANY_TESTS_PASSED=false
+	for TEST_NAME in "${!TEST_RESULTS[@]}"; do
+		if [[ "${TEST_RESULTS[$TEST_NAME]}" == true ]]; then
+			ANY_TESTS_PASSED=true
+			break
+		fi
+	done
+	
+	if [[ "$ANY_TESTS_PASSED" == false ]]; then
+		echo -e "\n${RED}[!] Didn't pass a single test${RESET}"
 	else
 		echo -e "\n${GREEN}[*] All tests are successfully passed!${RESET}"
 	fi
-
-	echo "${SUCCESSFULLY_TESTED[@]}"
+	
+	for TEST_NAME in "${!TEST_RESULTS[@]}"; do
+		echo "$TEST_NAME = ${TEST_RESULTS[$TEST_NAME]}"
+	done
 }
 
 function clear_screen() {
@@ -2790,5 +2808,5 @@ function check_privileges() {
 	fi
 }
 
-# check_privileges
-# the_unix_manager_tester
+check_privileges true
+the_unix_manager_tester

@@ -4,7 +4,7 @@
 theUnixManager - ultimate package manager && init system handling library made by Archetypum
 that simplifies interaction with UNIX systems and creation of system-related bash scripts. 
 
-## Installation (as root):
+ ## Installation of theUnixManager-unstable (as root):
 
 ```bash
 git clone https://github.com/Archetypum/theUnixManager-bash
