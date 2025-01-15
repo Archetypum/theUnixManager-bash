@@ -706,19 +706,19 @@ function get_init_system() {
     	# Returns:
         # 	Name of the init system (e.g., "systemd", "sysvinit", "upstart", "openrc", etc.)
 	
-	if [[ -f /run/systemd/system ]]; then
+	if [[ -d /run/systemd/system ]] || [[ "$(ps -p 1 -o comm=)" == "systemd" ]]; then
 		echo "systemd"
 		return
 	fi
 
+	if [[ -d /etc/init.d ]] && [[ -d /etc/init.d/openrc ]]; then
+		echo "openrc"
+		return
+	fi
+
 	if [[ -d /etc/init.d ]]; then
-		if [[ -d /etc/init.d/openrc ]]; then
-			echo "openrc"
-			return
-		else
-			echo "sysvinit"
-			return
-		fi
+		echo "sysvinit"
+		return
 	fi
 
 	if [[ -d /etc/s6 ]]; then
@@ -740,6 +740,7 @@ function get_init_system() {
 
 	echo "unknown"
 }
+
 
 #
 # Systemd Management:
@@ -2790,4 +2791,4 @@ function check_privileges() {
 }
 
 # check_privileges
-# the_unix_manager_tester
+the_unix_manager_tester
