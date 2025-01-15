@@ -2791,4 +2791,4 @@ function check_privileges() {
 }
 
 # check_privileges
-the_unix_manager_tester
+# the_unix_manager_tester
