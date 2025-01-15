@@ -1,6 +1,6 @@
-# theUnixManager v1.0.0-stable
+# theUnixManager-bash v1.0.0-stable
 
-This is the first stable release of theUnixManager.
+This is the first stable release of theUnixManager bash version.
 
 Features:
  
@@ -15,18 +15,18 @@ Nothing left to say here anymore, its just first stable release.
 "cloc ." statistics:
 
 ```text
-       9 text files.
-       9 unique files.                              
-       0 files ignored.
+      11 text files.
+      11 unique files.                              
+       1 file ignored.
 
-github.com/AlDanial/cloc v 1.96  T=0.02 s (550.9 files/s, 193660.5 lines/s)
+github.com/AlDanial/cloc v 1.96  T=0.02 s (602.3 files/s, 176259.3 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Bourne Shell                     1            449            336           2008
-Markdown                         7            141              0            228
+Bourne Shell                     1            451            336           2007
+Markdown                         9            155              0            269
 Text                             1              0              0              1
 -------------------------------------------------------------------------------
-SUM:                             9            590            336           2237
+SUM:                            11            606            336           2277
 -------------------------------------------------------------------------------
 ```
