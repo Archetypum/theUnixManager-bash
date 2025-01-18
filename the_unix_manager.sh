@@ -14,7 +14,7 @@
 #    * add more methods to the package managers.
 #    * many more?
 # 
-# theUnixManager is licensed by GNU Lesser General Public License V3.
+# theUnixManager is licensed by GNU Lesser General Public License v3.
 # Date: 18.10.2024
 # ---------------------------------------
 
@@ -28,6 +28,16 @@ declare CYAN="\e[0;36m"
 declare PURPLE="\033[95m"
 declare GREEN="\033[92m"
 declare RED="\033[91m"
+
+declare BG_BLACK="\033[40m"
+declare BG_RED="\033[41m"
+declare BG_GREEN="\033[42m"
+declare BG_ORANGE="\033[43m"
+declare BG_BLUE="\033[44m"
+declare BG_MAGENTA="\033[105m"
+declare BG_CYAN="\033[46m"
+declare BG_WHITE="\033[47m"
+
 declare BOLD="\033[1m"
 declare UNDERLINE="\033[4m"
 declare REVERSED="\033[7m"
@@ -202,6 +212,62 @@ function the_unix_manager_tester() {
 		TEST_RESULTS["red_text"]=false
 	fi
 	
+	echo -e "${BG_BLACK}black background${RESET}"
+	if prompt_user "[?] is that true?"; then
+		TEST_RESULTS["background_black"]=true
+	else
+		TEST_RESULTS["background_black"]=false
+	fi
+	
+	echo -e "${BG_RED}red background${RESET}"
+	if prompt_user "[?] is that true?"; then
+		TEST_RESULTS["background_red"]=true
+	else
+		TEST_RESULTS["background_red"]=false
+	fi
+	
+	echo -e "${BG_GREEN}green background${RESET}"
+	if prompt_user "[?] is that true?"; then
+		TEST_RESULTS["background_green"]=true
+	else
+		TEST_RESULTS["background_green"]=false
+	fi
+	
+	echo -e "${BG_ORANGE}orange background${RESET}"
+	if prompt_user "[?] is that true?"; then
+		TEST_RESULTS["background_orange"]=true
+	else
+		TEST_RESULTS["background_yellow"]=false
+	fi
+	
+	echo -e "${BG_BLUE}blue background${RESET}"
+	if prompt_user "[?] is that true?"; then
+		TEST_RESULTS["background_blue"]=true
+	else
+		TEST_RESULTS["background_blue"]=false
+	fi
+
+	echo -e "${BG_MAGENTA}magenta background${RESET}"
+	if prompt_user "[?] is that true?"; then
+		TEST_RESULTS["background_magenta"]=true
+	else
+		TEST_RESULTS["background_magenta"]=false
+	fi
+
+	echo -e "${BG_CYAN}cyan background${RESET}"
+	if prompt_user "[?] is that true?"; then
+		TEST_RESULTS["background_cyan"]=true
+	else
+		TEST_RESULTS["background_cyan"]=false
+	fi
+
+	echo -e "${BG_WHITE}white background${RESET}"
+	if prompt_user "[?] is that true?"; then
+		TEST_RESULTS["background_white"]=true
+	else
+		TEST_RESULTS["background_white"]=false
+	fi
+
 	echo -e "${BOLD}bold text${RESET}"
 	if prompt_user "[?] is that true?"; then
 		TEST_RESULTS["bold_text"]=true
@@ -2808,5 +2874,5 @@ function check_privileges() {
 	fi
 }
 
-check_privileges true
-the_unix_manager_tester
+# check_privileges true
+# the_unix_manager_tester
