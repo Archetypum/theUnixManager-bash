@@ -81,7 +81,7 @@ declare -a SLACKWARE_BASED=(
 )
 
 declare -a FEDORA_BASED=(
-	"fedora" "mos"
+	"fedora" "mos" "rocky"
 )
 
 declare -a CENTOS_BASED=(
@@ -747,7 +747,7 @@ function prompt_user() {
 	local PROMPT="$1"
 	local DEFAULT="${2:-N}"
 
-	read -rp "$PROMPT (y/n): " USER_INPUT
+	read -erp "$PROMPT (y/n): " USER_INPUT
 	USER_INPUT=$(echo "$USER_INPUT" | sed "s/^[[:space:]]*//;s/[[:space:]]*$//" | tr "[:upper:]" "[:lower:]")	
 	
 	if [[ -z "$USER_INPUT" ]]; then
