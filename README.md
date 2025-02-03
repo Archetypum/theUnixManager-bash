@@ -34,7 +34,7 @@ init_system_handling "$INIT_SYSTEM" "ssh" "start"
 
 ## License
 
-theUnixManager uses GNU Lesser General Public License V3. 
+theUnixManager uses **GNU Lesser General Public License v3**. 
 
 More information in:
 
