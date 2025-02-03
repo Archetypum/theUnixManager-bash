@@ -14,10 +14,10 @@ git clone https://github.com/Archetypum/theUnixManager-bash
 cd theUnixManager-bash
 ```
 
-Copy it to your desired location:
+Run installer:
 
 ```bash
-cp the_unix_manager.sh /usr/bin/the_unix_manager.sh  # we recommend using this path
+bash tum_installer.sh --install
 ```
 
 And then use it in your bash scripts:

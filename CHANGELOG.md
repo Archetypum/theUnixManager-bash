@@ -4,11 +4,11 @@ This is the first stable release of theUnixManager bash version.
 
 Features:
  
-    * 7 init systems support (systemd, sysvinit, init, s6, runit, launchd, openrc).
+* 7 init systems support (systemd, sysvinit, init, s6, runit, launchd, openrc).
 
-    * 52 GNU/Linux and BSD UNIX distributions support (and beyond!).
+* 52 GNU/Linux and BSD UNIX distributions support (and beyond!).
 
-    * 16 package managers support (apt, aptitude, dpkg, portage, dnf, yum, zypper, apk, xpbs, qi, slackpkg, guix, pacman, pkg, pkg_add, pkgin).
+* 16 package managers support (apt, aptitude, dpkg, portage, dnf, yum, zypper, apk, xpbs, qi, slackpkg, guix, pacman, pkg, pkg_add, pkgin).
 
 Nothing left to say here anymore, its just first stable release.
 
