@@ -110,9 +110,10 @@ declare -a NETBSD_BASED=(
 function the_unix_manager_version() {
     	# Returns:
 	# 	str: theUnixManager version.
+	
+	local VERSION
 
-	if [[ -f "VERSION.txt" ]]; then
-		local VERSION
+	if [[ -f "/etc/theunixmanager/bash/VERSION.txt" ]]; then
 		VERSION=$(cat VERSION.txt)
 		echo "$VERSION"
 	else
@@ -825,6 +826,17 @@ function get_init_system() {
 	echo "unknown"
 }
 
+function get_preffered_editor() {
+	# Gets user preffered text editor and stores it in /etc/theunixmanager/bash/EDITOR.txt
+	
+	local TEXT_EDITOR
+}
+
+function sudo_or_doas() {
+	# Gets user preferred command and stores it in /etc/theunixmanager/bash/COMMAND.txt
+	
+	local RESULT
+}
 
 #
 # Systemd Management:

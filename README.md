@@ -17,13 +17,13 @@ cd theUnixManager-bash
 Copy it to your desired location:
 
 ```bash
-cp the_unix_manager.sh ~
+cp the_unix_manager.sh /usr/bin/the_unix_manager.sh  # we recommend using this path
 ```
 
 And then use it in your bash scripts:
 
 ```bash
-source ~/the_unix_manager.sh
+source /usr/bin/the_unix_manager.sh
 
 DISTRO=$(get_user_distro)
 INIT_SYSTEM=$(get_init_system)
@@ -32,24 +32,14 @@ package_handling "$DISTRO" "install" "vim"
 init_system_handling "$INIT_SYSTEM" "ssh" "start"
 ```
 
-## Credits
-
-theUnixManager is a project by Archetypum with:
- - Kinderfeld as the lead developer and creator.
- (https://github.com/Kinderfeld)
- - WretchOfLights as the documentation writer.
- (https://github.com/WretchOfLights)
- - wazups as the illustrator
- (https://github.com/wazups)
-
 ## License
 
 theUnixManager uses GNU Lesser General Public License V3. 
 
 More information in:
 
-- LICENSE.md
-- https://www.fsf.org
-- https://www.gnu.org
+- _LICENSE.md_
+- _https://www.fsf.org_
+- _https://www.gnu.org_
 
 ![gnu](https://github.com/user-attachments/assets/66935a97-374f-4dbc-9f1c-428070fda139)

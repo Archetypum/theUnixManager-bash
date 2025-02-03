@@ -1,1 +1,1 @@
-v1.0.0-unstable
+v1.1.1-stable
