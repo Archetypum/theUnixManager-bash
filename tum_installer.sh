@@ -72,6 +72,8 @@ function install_theunixmanager() {
 		mkdir /etc/theunixmanager/bash
 		cp VERSION.txt /etc/theunixmanager/bash/VERSION.txt
 	fi
+	
+	touch /etc/theunixmanager/bash/EDITOR.txt
 
 	echo "[*] Success!"
 

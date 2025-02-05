@@ -114,7 +114,7 @@ function the_unix_manager_version() {
 	local VERSION
 
 	if [[ -f "/etc/theunixmanager/bash/VERSION.txt" ]]; then
-		VERSION=$(cat VERSION.txt)
+		VERSION=$(cat "/etc/theunixmanager/bash/VERSION.txt")
 		echo "$VERSION"
 	else
 		echo -e "${RED}[!] Error: 'VERSION.txt' file not found.\nBroken installation?${RESET}"
@@ -132,9 +132,12 @@ function the_unix_manager_tester() {
 	declare -A TEST_RESULTS
 	local INIT_SYSTEM
 	local DISTRO
-	
+	local YOUR_EDITOR
+
 	INIT_SYSTEM=$(get_init_system)
 	DISTRO=$(get_user_distro)
+	YOUR_EDITOR=$(get_preferred_editor)
+	ROOT_COMMAND=$(sudo_or_doas)
 
 	echo "user distro: $DISTRO"
 	if prompt_user "[?] is that true?"; then
@@ -149,7 +152,21 @@ function the_unix_manager_tester() {
 	else
 		TEST_RESULTS["get_init_system"]=false
 	fi
+
+	echo "user preferred editor: $YOUR_EDITOR"
+	if prompt_user "[?] is that true"; then
+		TEST_RESULTS["get_preferred_editor"]=true
+	else
+		TEST_RESULTS["get_preferred_editor"]=false
+	fi
 	
+	echo "root command: $ROOT_COMMAND"
+	if prompt_user "[?] is that true"; then
+		TEST_RESULTS["sudo_or_doas"]=true
+	else
+		TEST_RESULTS["sudo_or_doas"]=false
+	fi
+
 	echo -e "${BLACK}black text${RESET}"
 	if prompt_user "[?] is that true?"; then
 		TEST_RESULTS["black_text"]=true
@@ -826,16 +843,52 @@ function get_init_system() {
 	echo "unknown"
 }
 
-function get_preffered_editor() {
+function get_preferred_editor() {
 	# Gets user preffered text editor and stores it in /etc/theunixmanager/bash/EDITOR.txt
-	
+	#
+	# Returns:
+	# 	User's preferred editor.
+
 	local TEXT_EDITOR
+	local EDITOR_CONFIG_PATH="/etc/theunixmanager/bash/EDITOR.txt"
+
+	if [[ -f "$EDITOR_CONFIG_PATH" ]]; then
+		TEXT_EDITOR=$(cat "$EDITOR_CONFIG_PATH")
+		if [[ -n "$TEXT_EDITOR" ]]; then
+			echo "$TEXT_EDITOR"
+			return
+		fi
+	fi
+
+	echo -e "\n${ORANGE}[!] Error: No preferred editor found at $EDITOR_CONFIG_PATH.${RESET}"
+	read -rp "[==>] Enter your preferred editor manually: " TEXT_EDITOR
+	echo "$TEXT_EDITOR" > "$EDITOR_CONFIG_PATH"
+	echo "$TEXT_EDITOR"
 }
 
 function sudo_or_doas() {
 	# Gets user preferred command and stores it in /etc/theunixmanager/bash/COMMAND.txt
 	
 	local RESULT
+	local COMMAND_FILE="/etc/theunixmanager/bash/COMMAND.txt"
+
+	if [[ -f "$COMMAND_FILE" ]]; then
+		RESULT=$(cat "$COMMAND_FILE")
+		if [[ "$RESULT" == "sudo" || "$RESULT" == "doas" ]]; then
+			echo "$RESULT"
+			return
+		fi
+	fi
+
+	if command -v sudo $>/dev/null; then
+		echo "sudo" > "$COMMAND_FILE"
+		echo "sudo"
+	elif command -v doas $>/dev/null; then
+		echo "doas" > "$COMMAND_FILE"
+		echo "doas"
+	else
+		echo -e "\n${RED}[!] Error: Neither sudo nor doas available.${RESET}"
+	fi
 }
 
 #
@@ -2886,5 +2939,5 @@ function check_privileges() {
 	fi
 }
 
-# check_privileges true
-# the_unix_manager_tester
+check_privileges true
+the_unix_manager_tester
