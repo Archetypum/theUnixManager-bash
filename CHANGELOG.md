@@ -17,18 +17,18 @@ Nothing left to say here anymore, its just first stable release.
 "cloc ." statistics:
 
 ```text
-      14 text files.
-      13 unique files.                              
-       2 files ignored.
+      16 text files.
+      14 unique files.                              
+       3 files ignored.
 
-github.com/AlDanial/cloc v 1.96  T=0.02 s (706.5 files/s, 190803.3 lines/s)
+github.com/AlDanial/cloc v 1.96  T=0.03 s (455.6 files/s, 90867.8 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Bourne Shell                     2            501            356           2230
-Markdown                        10            154              0            269
+Python                           3            443            357           1537
+Markdown                        10            164              0            290
 Text                             1              0              0              1
 -------------------------------------------------------------------------------
-SUM:                            13            655            356           2500
+SUM:                            14            607            357           1828
 -------------------------------------------------------------------------------
 ```

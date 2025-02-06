@@ -2939,5 +2939,5 @@ function check_privileges() {
 	fi
 }
 
-check_privileges true
-the_unix_manager_tester
+# check_privileges true
+# the_unix_manager_tester
