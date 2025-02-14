@@ -2940,4 +2940,4 @@ function check_privileges() {
 }
 
 # check_privileges true
-the_unix_manager_tester
+# the_unix_manager_tester
